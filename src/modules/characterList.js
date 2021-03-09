@@ -17,20 +17,11 @@ export const initCharacters = () => async (dispatch, getState) => {
   }
 };
 
-export const getMoreCharacters = () => async (dispatch, getState) => {
+export const changeFilters = (name, value) => async (dispatch, getState) => {
+  dispatch({ type: CHANGE_FILTER, name, value });
+  dispatch({ type: INIT_PAGE });
   try {
     const { page, filter } = getState().characterList;
-    const characters = await API.getCharacters(page, filter);
-    dispatch({ type: GET_MORE_LIST, list: characters });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const changeFilters = (filter) => async (dispatch, getState) => {
-  dispatch({ type: CHANGE_FILTER, filter });
-  try {
-    const { page } = getState().characterList;
     const characters = await API.getCharacters(page, filter);
     dispatch({ type: INIT_LIST, list: characters });
   } catch (e) {
@@ -48,18 +39,6 @@ export const increasePage = () => async (dispatch, getState) => {
     } catch (e) {
       console.log(e);
     }
-  }
-};
-
-export const initPage = () => async (dispatch, getState) => {
-  dispatch({ type: INIT_PAGE });
-  try {
-    console.log(getState());
-    const { page, filter } = getState().characterList;
-    const characters = await API.getCharacters(page, filter);
-    dispatch({ type: INIT_LIST, list: characters });
-  } catch (e) {
-    console.log(e);
   }
 };
 
@@ -91,25 +70,15 @@ export default function characterList(state = initialState, action) {
         ...state,
         list: action.list,
       };
-    case GET_MORE_LIST:
-      return {
-        ...state,
-        list: state.list.concat(action.list),
-      };
     case CHANGE_FILTER:
       return {
         ...state,
-        filter: action.filter,
+        filter: { ...state.filter, [action.name]: action.value },
       };
     case INCREASE_PAGE:
       return {
         ...state,
         page: state.page + 1,
-      };
-    case INIT_PAGE:
-      return {
-        ...state,
-        page: 1,
       };
     case SET_PAGE:
       return {

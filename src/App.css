@@ -1,7 +1,8 @@
 .header {
-  background-color: antiquewhite;
+  background-color: rgb(104, 146, 163);
+  color: white;
   display: flex;
-  padding: 2rem;
+  padding: 1.5rem;
   justify-content: center;
   align-items: center;
 }
@@ -10,16 +11,18 @@
   display: flex;
   padding: 0.8rem;
   justify-content: space-around;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .filter_item {
-  background-color: cadetblue;
+  background-color: rgb(135, 171, 219);
   border-radius: 10px;
   padding: 0.8rem;
 }
 
 .init_button {
-  background-color: orange;
+  background-color: rgb(95, 201, 201);
   border: none;
   border-radius: 10px;
   padding: 0.8rem;
@@ -29,7 +32,7 @@
 .charactor_card {
   margin: 2em;
   padding: 1em;
-  background-color: beige;
+  background-color: rgb(213, 215, 216);
   border-radius: 10px;
   display: flex;
 }
