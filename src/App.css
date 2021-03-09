@@ -1,0 +1,52 @@
+.header {
+  background-color: antiquewhite;
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.filters_container {
+  display: flex;
+  padding: 0.8rem;
+  justify-content: space-around;
+}
+
+.filter_item {
+  background-color: cadetblue;
+  border-radius: 10px;
+  padding: 0.8rem;
+}
+
+.init_button {
+  background-color: orange;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  cursor: pointer;
+}
+
+.charactor_card {
+  margin: 2em;
+  padding: 1em;
+  background-color: beige;
+  border-radius: 10px;
+  display: flex;
+}
+
+.charactor_data {
+  flex: 3 3 0;
+}
+
+.charactor_data th,
+.charactor_data td {
+  text-align: left;
+  padding: 0.3em;
+}
+
+.delete_button_area {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
