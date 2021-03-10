@@ -8,12 +8,15 @@ const INIT_PAGE = 'INIT_PAGE';
 const SET_PAGE = 'SET_PAGE';
 const DELETE_ITEM = 'DELETE_ITEM';
 const RESTORE_ITEMS = 'RESTORE_ITEMS';
+const SET_LOADING = 'SET_LOADING';
 
 export const initCharacters = () => async (dispatch, getState) => {
+  dispatch({ type: SET_LOADING, loading: true });
   try {
     const { page, filter } = getState().characterList;
     const characters = await API.getCharacters(page, filter);
     dispatch({ type: INIT_LIST, list: characters });
+    dispatch({ type: SET_LOADING, loading: false });
   } catch (e) {
     console.log(e);
   }
@@ -22,10 +25,12 @@ export const initCharacters = () => async (dispatch, getState) => {
 export const changeFilters = (name, value) => async (dispatch, getState) => {
   dispatch({ type: CHANGE_FILTER, name, value });
   dispatch({ type: INIT_PAGE });
+  dispatch({ type: SET_LOADING, loading: true });
   try {
     const { page, filter } = getState().characterList;
     const characters = await API.getCharacters(page, filter);
     dispatch({ type: INIT_LIST, list: characters });
+    dispatch({ type: SET_LOADING, loading: false });
   } catch (e) {
     console.log(e);
   }
@@ -71,6 +76,7 @@ const initialState = {
     tvSeries: false,
   },
   list: [],
+  loading: false,
 };
 
 export default function characterList(state = initialState, action) {
@@ -122,6 +128,11 @@ export default function characterList(state = initialState, action) {
           item.isDeleted = false;
           return item;
         }),
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.loading,
       };
     default:
       return state;

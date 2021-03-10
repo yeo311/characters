@@ -9,8 +9,9 @@ import {
 import Character from './Character';
 
 const CharacterList = () => {
-  const { charList } = useSelector((state) => ({
+  const { charList, loading } = useSelector((state) => ({
     charList: state.characterList.list,
+    loading: state.characterList.loading,
   }));
 
   const dispatch = useDispatch();
@@ -59,6 +60,11 @@ const CharacterList = () => {
           />
         );
       })}
+      {loading && (
+        <div style={{ width: '100%', textAlign: 'center', padding: '2rem' }}>
+          Loading...
+        </div>
+      )}
     </section>
   );
 };

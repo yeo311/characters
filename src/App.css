@@ -10,9 +10,9 @@
 .filters_container {
   display: flex;
   padding: 0.8rem;
-  justify-content: space-around;
+  justify-content: space-between;
   max-width: 600px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .filter_item {
@@ -32,22 +32,35 @@
 }
 
 .character_card {
-  margin: 1em;
+  margin: 1em auto;
   padding: 1em;
   background-color: #ffffff;
   border: 1px solid #e7eaec;
   border-radius: 5px;
   display: flex;
+  max-width: 600px;
 }
 
 .character_data {
   flex: 3 3 0;
 }
 
-.character_data th,
-.character_data td {
+.character_data table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.character_data th {
   text-align: left;
   padding: 0.3em;
+  width: 30%;
+}
+
+.character_data td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 70%;
 }
 
 .delete_button_area {
@@ -59,8 +72,9 @@
 
 .delete_button {
   border: 0;
-  background-color: aliceblue;
-  padding: 0.5em;
-  border-radius: 5px;
+  background-color: #fd5c5c;
+  color: #ffffff;
+  padding: 0.8em 1.5em;
+  border-radius: 20px;
   cursor: pointer;
 }

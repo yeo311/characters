@@ -5,6 +5,8 @@ const Character = ({ character, handleDelete }) => {
   if (character.tvSeries.length < 2 && character.tvSeries[0] === '') {
     tvSeriesLen = 0;
   }
+  const aliases = character.aliases.join(', ');
+  const titles = character.titles.join(', ');
 
   return (
     <div className="character_card">
@@ -13,15 +15,17 @@ const Character = ({ character, handleDelete }) => {
           <tbody>
             <tr>
               <th>Name</th>
-              <td>{character.name}</td>
+              <td title={character.name}>
+                {character.name ? character.name : '-'}
+              </td>
             </tr>
             <tr>
               <th>Aliases</th>
-              <td>{character.aliases.join(', ')}</td>
+              <td title={aliases}>{aliases ? aliases : '-'}</td>
             </tr>
             <tr>
               <th>Title</th>
-              <td>{character.titles.join(', ')}</td>
+              <td title={titles}>{titles ? titles : '-'}</td>
             </tr>
             <tr>
               <th>Books</th>
