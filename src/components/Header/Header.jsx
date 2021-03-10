@@ -4,4 +4,4 @@ const Header = () => {
   return <header className="header">MSS</header>;
 };
 
-export default React.memo(Header);
+export default Header;

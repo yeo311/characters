@@ -1,40 +1,46 @@
 import React from 'react';
 
-const Character = ({ charactor }) => {
+const Character = ({ character, handleDelete }) => {
+  let tvSeriesLen = character.tvSeries.length;
+  if (character.tvSeries.length < 2 && character.tvSeries[0] === '') {
+    tvSeriesLen = 0;
+  }
+
   return (
-    <div className="charactor_card">
-      <div className="charactor_data">
+    <div className="character_card">
+      <div className="character_data">
         <table>
           <tbody>
             <tr>
               <th>Name</th>
-              <td>{charactor.name}</td>
+              <td>{character.name}</td>
             </tr>
             <tr>
               <th>Aliases</th>
-              <td>{charactor.aliases.join(', ')}</td>
+              <td>{character.aliases.join(', ')}</td>
             </tr>
             <tr>
               <th>Title</th>
-              <td>{charactor.titles.join(', ')}</td>
+              <td>{character.titles.join(', ')}</td>
             </tr>
             <tr>
               <th>Books</th>
-              <td>{charactor.books.length}</td>
+              <td>{character.books.length}</td>
             </tr>
             <tr>
               <th>TV Series</th>
-              <td>{charactor.tvSeries.length}</td>
-            </tr>
-            <tr>
-              <th>Gender</th>
-              <td>{charactor.gender}</td>
+              <td>{tvSeriesLen}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div className="delete_button_area">
-        <button>삭제</button>
+        <button
+          className="delete_button"
+          onClick={() => handleDelete(character.url)}
+        >
+          삭제
+        </button>
       </div>
     </div>
   );

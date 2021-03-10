@@ -13,8 +13,12 @@ export const getCharacters = async (pageNum, filter) => {
   const resp = await fetch(
     `https://www.anapioficeandfire.com/api/characters?page=${pageNum}&pageSize=10${filterQuery}`
   );
-  const respData = await resp.json();
-
+  let respData = await resp.json();
+  if (filter && filter.tvSeries) {
+    respData = respData.filter((item) => {
+      return item.tvSeries[0] === '';
+    });
+  }
   console.log(respData);
   return respData;
 };

@@ -1,8 +1,8 @@
 .header {
-  background-color: rgb(104, 146, 163);
-  color: white;
+  background-color: #2f4050;
+  color: #dfe4ed;
   display: flex;
-  padding: 1.5rem;
+  padding: 1rem;
   justify-content: center;
   align-items: center;
 }
@@ -16,33 +16,36 @@
 }
 
 .filter_item {
-  background-color: rgb(135, 171, 219);
-  border-radius: 10px;
+  background-color: #1ab394;
+  color: #ffffff;
+  border-radius: 5px;
   padding: 0.8rem;
 }
 
 .init_button {
-  background-color: rgb(95, 201, 201);
+  background-color: #23c6c8;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 0.8rem;
   cursor: pointer;
+  color: #ffffff;
 }
 
-.charactor_card {
-  margin: 2em;
+.character_card {
+  margin: 1em;
   padding: 1em;
-  background-color: rgb(213, 215, 216);
-  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #e7eaec;
+  border-radius: 5px;
   display: flex;
 }
 
-.charactor_data {
+.character_data {
   flex: 3 3 0;
 }
 
-.charactor_data th,
-.charactor_data td {
+.character_data th,
+.character_data td {
   text-align: left;
   padding: 0.3em;
 }
@@ -52,4 +55,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.delete_button {
+  border: 0;
+  background-color: aliceblue;
+  padding: 0.5em;
+  border-radius: 5px;
+  cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  deleteItem,
   increasePage,
   initCharacters,
   setPage,
@@ -13,6 +14,10 @@ const CharacterList = () => {
   }));
 
   const dispatch = useDispatch();
+
+  function handleDelete(id) {
+    dispatch(deleteItem(id));
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -45,8 +50,14 @@ const CharacterList = () => {
 
   return (
     <section>
-      {charList.map((item, index) => {
-        return <Character charactor={item} key={index} />;
+      {charList.map((item) => {
+        return item.isDeleted ? null : (
+          <Character
+            character={item}
+            key={item.url}
+            handleDelete={handleDelete}
+          />
+        );
       })}
     </section>
   );

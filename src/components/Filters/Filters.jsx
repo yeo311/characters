@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeFilters } from '../../modules/characterList';
+import { changeFilters, restoreItems } from '../../modules/characterList';
 
 const Filter = ({ name, labelName, handleChange }) => {
   return (
@@ -20,6 +20,10 @@ const Filters = () => {
     dispatch(changeFilters(e.target.name, e.target.checked));
   };
 
+  const handleRestore = () => {
+    dispatch(restoreItems());
+  };
+
   return (
     <div className="filters_container">
       <Filter
@@ -33,7 +37,9 @@ const Filters = () => {
         labelName="TV Series 없음"
         handleChange={handleChange}
       />
-      <button className="init_button">초기화</button>
+      <button className="init_button" onClick={handleRestore}>
+        초기화
+      </button>
     </div>
   );
 };
