@@ -1,6 +1,4 @@
 export const getCharacters = async (pageNum, filter) => {
-  console.log(pageNum);
-  console.log(filter);
   let filterQuery = '';
   if (filter) {
     if (filter.alive) {
@@ -19,6 +17,5 @@ export const getCharacters = async (pageNum, filter) => {
       return item.tvSeries[0] === '';
     });
   }
-  console.log(respData);
   return respData;
 };

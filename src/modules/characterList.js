@@ -8,35 +8,41 @@ const INIT_PAGE = 'INIT_PAGE';
 const SET_PAGE = 'SET_PAGE';
 const DELETE_ITEM = 'DELETE_ITEM';
 const RESTORE_ITEMS = 'RESTORE_ITEMS';
-const SET_LOADING = 'SET_LOADING';
+const GET_LIST_LOADING = 'GET_LIST_LOADING';
+const GET_LIST_ERROR = 'GET_LIST_ERROR';
 
 export const initCharacters = () => async (dispatch, getState) => {
-  dispatch({ type: SET_LOADING, loading: true });
+  dispatch({ type: GET_LIST_LOADING, loading: true });
   try {
     const { page, filter } = getState().characterList;
     const characters = await API.getCharacters(page, filter);
     dispatch({ type: INIT_LIST, list: characters });
-    dispatch({ type: SET_LOADING, loading: false });
   } catch (e) {
     console.log(e);
+    dispatch({ type: GET_LIST_ERROR, isError: true });
+  } finally {
+    dispatch({ type: GET_LIST_LOADING, loading: false });
   }
 };
 
 export const changeFilters = (name, value) => async (dispatch, getState) => {
   dispatch({ type: CHANGE_FILTER, name, value });
   dispatch({ type: INIT_PAGE });
-  dispatch({ type: SET_LOADING, loading: true });
+  dispatch({ type: GET_LIST_LOADING, loading: true });
   try {
     const { page, filter } = getState().characterList;
     const characters = await API.getCharacters(page, filter);
     dispatch({ type: INIT_LIST, list: characters });
-    dispatch({ type: SET_LOADING, loading: false });
   } catch (e) {
     console.log(e);
+    dispatch({ type: GET_LIST_ERROR, isError: true });
+  } finally {
+    dispatch({ type: GET_LIST_LOADING, loading: false });
   }
 };
 
 export const increasePage = () => async (dispatch, getState) => {
+  dispatch({ type: GET_LIST_LOADING, loading: true });
   if (getState().characterList.page < 10) {
     dispatch({ type: INCREASE_PAGE });
     try {
@@ -45,18 +51,25 @@ export const increasePage = () => async (dispatch, getState) => {
       dispatch({ type: GET_MORE_LIST, list: characters });
     } catch (e) {
       console.log(e);
+      dispatch({ type: GET_LIST_ERROR, isError: true });
+    } finally {
+      dispatch({ type: GET_LIST_LOADING, loading: false });
     }
   }
 };
 
 export const setPage = (page) => async (dispatch, getState) => {
   dispatch({ type: SET_PAGE, page });
+  dispatch({ type: GET_LIST_LOADING, loading: true });
   try {
     const { filter } = getState().characterList;
     const characters = await API.getCharacters(page, filter);
     dispatch({ type: INIT_LIST, list: characters });
   } catch (e) {
     console.log(e);
+    dispatch({ type: GET_LIST_ERROR, isError: true });
+  } finally {
+    dispatch({ type: GET_LIST_LOADING, loading: false });
   }
 };
 
@@ -77,6 +90,7 @@ const initialState = {
   },
   list: [],
   loading: false,
+  isError: false,
 };
 
 export default function characterList(state = initialState, action) {
@@ -129,10 +143,15 @@ export default function characterList(state = initialState, action) {
           return item;
         }),
       };
-    case SET_LOADING:
+    case GET_LIST_LOADING:
       return {
         ...state,
         loading: action.loading,
+      };
+    case GET_LIST_ERROR:
+      return {
+        ...state,
+        isError: action.isError,
       };
     default:
       return state;

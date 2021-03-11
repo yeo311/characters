@@ -9,9 +9,10 @@ import {
 import Character from './Character';
 
 const CharacterList = () => {
-  const { charList, loading } = useSelector((state) => ({
+  const { charList, loading, isError } = useSelector((state) => ({
     charList: state.characterList.list,
     loading: state.characterList.loading,
+    isError: state.characterList.isError,
   }));
 
   const dispatch = useDispatch();
@@ -38,7 +39,6 @@ const CharacterList = () => {
       const scrollTop = document.documentElement.scrollTop;
       const clientHeight = document.documentElement.clientHeight;
       if (scrollTop + clientHeight >= scrollHeight) {
-        console.log('GET More');
         dispatch(increasePage());
       }
     };
@@ -51,20 +51,22 @@ const CharacterList = () => {
 
   return (
     <section>
-      {charList.map((item) => {
-        return item.isDeleted ? null : (
-          <Character
-            character={item}
-            key={item.url}
-            handleDelete={handleDelete}
-          />
-        );
-      })}
-      {loading && (
-        <div style={{ width: '100%', textAlign: 'center', padding: '2rem' }}>
-          Loading...
+      {isError ? (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          오류가 발생했습니다.
         </div>
+      ) : (
+        charList.map((item) => {
+          return item.isDeleted ? null : (
+            <Character
+              character={item}
+              key={item.url}
+              handleDelete={handleDelete}
+            />
+          );
+        })
       )}
+      {loading && <div className="loader_container">Loading...</div>}
     </section>
   );
 };

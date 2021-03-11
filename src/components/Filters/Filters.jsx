@@ -5,10 +5,11 @@ import { changeFilters, restoreItems } from '../../modules/characterList';
 const Filter = ({ name, labelName, handleChange }) => {
   return (
     <div className="filter_item">
-      <label>
+      <label className="switch">
         <input type="checkbox" name={name} onChange={handleChange} />
-        {labelName}
+        <span className="slider"></span>
       </label>
+      {labelName}
     </div>
   );
 };
