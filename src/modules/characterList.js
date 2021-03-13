@@ -42,8 +42,8 @@ export const changeFilters = (name, value) => async (dispatch, getState) => {
 };
 
 export const increasePage = () => async (dispatch, getState) => {
-  dispatch({ type: GET_LIST_LOADING, loading: true });
   if (getState().characterList.page < 10) {
+    dispatch({ type: GET_LIST_LOADING, loading: true });
     dispatch({ type: INCREASE_PAGE });
     try {
       const { page, filter } = getState().characterList;

@@ -7,6 +7,7 @@ import {
   setPage,
 } from '../../modules/characterList';
 import Character from './Character';
+import _ from 'lodash';
 
 const CharacterList = () => {
   const { charList, loading, isError } = useSelector((state) => ({
@@ -43,9 +44,13 @@ const CharacterList = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const throttleScroll = _.throttle(function () {
+      handleScroll();
+    }, 300);
+
+    window.addEventListener('scroll', throttleScroll, false);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', throttleScroll, false);
     };
   }, [dispatch]);
 

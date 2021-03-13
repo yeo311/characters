@@ -12,13 +12,13 @@
   justify-content: space-between;
   max-width: 600px;
   margin: auto;
-  flex-wrap: wrap;
 }
 
 .filter_item {
   border-radius: 5px;
   padding: 0.8rem;
-  flex-basis: auto;
+  display: flex;
+  align-items: center;
 }
 
 .switch {
@@ -78,16 +78,19 @@ input:checked + .slider:before {
 .init_button {
   background-color: #ccc;
   border: none;
-  border-radius: 5px;
-  padding: 0.8rem;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
   cursor: pointer;
   color: #ffffff;
   transition: background-color 0.3s;
-  flex-basis: auto;
+  font-size: 1em;
+  font-weight: 700;
+  align-self: center;
+  width: 100px;
 }
 
 .init_button:hover {
-  background-color: cadetblue;
+  background-color: rgb(60, 123, 218);
 }
 
 .character_card {
@@ -98,10 +101,13 @@ input:checked + .slider:before {
   border-radius: 5px;
   display: flex;
   max-width: 600px;
+  -webkit-box-shadow: 4px 4px 13px -1px rgba(51, 51, 51, 0.75);
+  -moz-box-shadow: 4px 4px 13px -1px rgba(51, 51, 51, 0.75);
+  box-shadow: 4px 4px 13px -1px rgba(51, 51, 51, 0.75);
 }
 
 .character_data {
-  flex: 3 3 0;
+  flex: 4 4 0;
 }
 
 .character_data table {
@@ -137,6 +143,7 @@ input:checked + .slider:before {
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: 600;
 }
 
 .delete_button:hover {
@@ -155,4 +162,13 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .filters_container {
+    flex-direction: column;
+  }
+  .init_button {
+    margin-top: 10px;
+  }
 }
