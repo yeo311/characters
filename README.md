@@ -12,6 +12,10 @@ or
 yarn deploy
 ```
 
+## 접속
+
+- http://localhost:8080
+
 ## 프레임워크 & 라이브러리
 
 - React.js
